@@ -1,0 +1,8 @@
+caret=7.0-1
+doParallel=1.0.17
+gbm=2.2.2
+pROC=1.18.5
+renv=1.1.4
+tidymodels=1.2.0
+xgboost=1.7.8.1
+parallel=4.4.2
