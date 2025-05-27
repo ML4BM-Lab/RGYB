@@ -1,5 +1,5 @@
 import os
-#os.environ['R_HOME'] = r'C:\Program Files\R\R-4.4.3'
+os.environ['R_HOME'] = r'C:\Program Files\R\R-4.4.3'
 import pandas as pd
 import rpy2.robjects as ro
 from rpy2.robjects import r, pandas2ri
@@ -68,16 +68,16 @@ def submit():
     errores = []
     campos = {
         "campo1": ("Age", 18, 90),
-        "campo2": ("Roux Limb", 30, 300),
+        "campo2": ("Roux limb", 30, 300),
         "campo3": ("Weight", 50, 300),
         "campo4": ("BMI", 20, 100),
-        "campo5": ("Fat Mass", 20, 200),
-        "campo6": ("Waist", 50, 250),
-        "campo7": ("Hip", 50, 250),
+        "campo5": ("Fat mass", 20, 200),
+        "campo6": ("Waist circumference", 50, 250),
+        "campo7": ("Hip circumference", 50, 250),
         "campo8": ("REE (r)", 50, 5000),
         "campo9": ("REE (t)", 50, 5000),
-        "campo10": ("Basal Glycemia", 40, 600),
-        "campo11": ("120' Glycemia", 40, 600),
+        "campo10": ("Basal glycemia", 40, 600),
+        "campo11": ("120' glycemia", 40, 600),
         "campo12": ("HOMA", 0.1, 100),
         "campo13": ("Triglycerides", 20, 2000),
         "campo14": ("Leptin", 0.5, 400),
@@ -113,9 +113,10 @@ def submit():
                             dfr = ro.conversion.get_conversion().py2rpy(df)
                             r.assign('dfr',dfr)
                             modelo_gb_bmi()
-                            prediccionesx+=1
+                            prediccionesx=1
                             # r('print("pasoooooooooo")')
                             modelo_rf_bmi()
+                            prediccionesx+=1
                             return f"Predicciones realizadas exitosamente: {prediccionesx}"
     except Exception as e:
             return f"Ocurrió un error al procesar el archivo: {str(e)}"  
@@ -143,8 +144,8 @@ def modelo_gb_bmi():
         name_test = names(test_data)
         common <- intersect(name_test,name_dfr)
         ncommon <- length(common)
-        #print(ncommon)
-        #print(common)
+        print(ncommon)
+        print(common)
       
 
         indices_common <- match(common,name_test) 
@@ -157,7 +158,7 @@ def modelo_gb_bmi():
         filas_con_na  <- sapply(dfr,function(x) which(is.na(x)))
         print(filas_con_na)
         dfp <- drop_na(dfr)
-      
+        dfcp <- dfp
         dfs<-scale(dfr,center = means, scale = sds)
         dfs <- as.data.frame(dfs)
         names(dfs) <- names(dfr)[1:16]
@@ -177,13 +178,13 @@ def modelo_gb_bmi():
         #dfp$prediccion <- ifelse(prediccion$.pred_0 > prediccion$.pred_1,0,1)
         #dfp$significado <- ifelse(prediccion$.pred_0 < prediccion$.pred_1,"Fracaso en la cirugia","exito en la cirugia")
 
-        dfp$Computed_probability_of_success <- prediccion$.pred_1
-        dfp$Final_predicted_label <- ifelse(prediccion$.pred_1 > 0.4,1,0)
-        dfp$Final_writen_label <- ifelse(prediccion$.pred_1 > 0.4,"success","failure")
-        #print(dfp)
+        dfcp$Computed_probability_of_success <- prediccion$.pred_1
+        dfcp$Final_predicted_label <- ifelse(prediccion$.pred_1 > 0.4,1,0)
+        dfcp$Final_writen_label <- ifelse(prediccion$.pred_1 > 0.4,"success","failure")
+        print(dfcp)
       
         nombre_archivo <- "/app/obesidad/gb_bmi_toppred_predict.csv"
-        write.csv(dfp, file = nombre_archivo, row.names = FALSE)
+        write.csv(dfcp, file = nombre_archivo, row.names = FALSE)
 
       ''')
     
@@ -217,7 +218,7 @@ def modelo_rf_bmi():
         filas_con_na  <- sapply(dfr,function(x) which(is.na(x)))
         print(filas_con_na)
         dfp <- drop_na(dfr)
-      
+        dfcp <- dfp
         dfs<-scale(dfp,center=means,scale=sds)
         dfs <- as.data.frame(dfs)
         names(dfs) <- names(dfr)[1:16]
@@ -235,13 +236,13 @@ def modelo_rf_bmi():
         #dfp$prediccion <- ifelse(prediccion$.pred_0 > prediccion$.pred_1,0,1)
         #dfp$significado <- ifelse(prediccion$.pred_0 > prediccion$.pred_1,"Fracaso en la cirugia","exito en la cirugia")
         
-        dfp$Computed_probability_of_success <- prediccion$.pred_1
-        dfp$Final_predicted_label <- ifelse(prediccion$.pred_1 > 0.32,1,0)
-        dfp$Final_writen_label <- ifelse(prediccion$.pred_1 > 0.32,"success","failure")
-        print(dfp)
+        dfcp$Computed_probability_of_success <- prediccion$.pred_1
+        dfcp$Final_predicted_label <- ifelse(prediccion$.pred_1 > 0.32,1,0)
+        dfcp$Final_writen_label <- ifelse(prediccion$.pred_1 > 0.32,"success","failure")
+        print(dfcp)
         
         nombre_archivo <- "/app/obesidad/rf_bmi_toppred_predict.csv"
-        write.csv(dfp, file = nombre_archivo, row.names = FALSE)
+        write.csv(dfcp, file = nombre_archivo, row.names = FALSE)
       
       ''')
 
@@ -265,7 +266,7 @@ def model_gb_ewl():
         filas_con_na  <- sapply(dfr,function(x) which(is.na(x)))
         print(filas_con_na)
         dfp <- drop_na(dfr)
-      
+        dfcp <- dfp
         dfs<-scale(dfp,center=means,scale=sds)
         dfs <- as.data.frame(dfs)
         #print(dfs)
@@ -302,13 +303,13 @@ def model_gb_ewl():
         #dfp$prediccion <- ifelse(prediccion$.pred_0 > prediccion$.pred_1,0,1)
         #dfp$significado <- ifelse(prediccion$.pred_0 > prediccion$.pred_1,"Fracaso en la cirugia","exito en la cirugia")
 
-        dfp$Computed_probability_of_success <- prediccion$.pred_1
-        dfp$Final_predicted_label <- ifelse(prediccion$.pred_1 > 0.4,1,0)
-        dfp$Final_writen_label <- ifelse(prediccion$.pred_1 > 0.4,"success","failure")
-        #print(dfp)
+        dfcp$Computed_probability_of_success <- prediccion$.pred_1
+        dfcpfp$Final_predicted_label <- ifelse(prediccion$.pred_1 > 0.4,1,0)
+        dfcp$Final_writen_label <- ifelse(prediccion$.pred_1 > 0.4,"success","failure")
+        #print(dfcp)
       
         nombre_archivo <- "/app/obesidad/gb_ewl_allpred_predict.csv"
-        write.csv(dfp, file = nombre_archivo, row.names = FALSE)
+        write.csv(dfcp, file = nombre_archivo, row.names = FALSE)
     ''')
 
 if __name__ == '__main__':

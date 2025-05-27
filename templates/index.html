@@ -8,74 +8,95 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css')}}">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-</head>   
+</head>
+
 <body>
     <div id="navbarToggleExternalContent">
         <div class="bg-dark p-4">
             <div class="row">
                 <div class="col">
-                    <img class="encabezadol" src="{{ url_for('static',filename='/images/unav-white-logo.svg')}}" alt="unav Logo" class="img-fluid" >
+                    <img class="encabezadol" src="{{ url_for('static',filename='/images/unav-white-logo.svg')}}"
+                        alt="unav Logo" class="img-fluid">
                 </div>
                 <div class="col">
-                    <img class="encabezadol" src="{{ url_for('static',filename='/images/logo-blanco-cun.svg')}}" alt="unav clinic Logo" class="img-fluid" >
+                    <img class="encabezadol" src="{{ url_for('static',filename='/images/logo-blanco-cun.svg')}}"
+                        alt="unav clinic Logo" class="img-fluid">
                 </div>
                 <div class="col">
-                    <img class="encabezado2" src="{{ url_for('static',filename='/images/tecnun2.png')}}" alt="tecnun" class="img-fluid" >
+                    <img class="encabezado2" src="{{ url_for('static',filename='/images/tecnun2.png')}}" alt="tecnun"
+                        class="img-fluid">
                 </div>
             </div>
         </div>
     </div>
-    <h1 style="text-align: center;">RGYB surgery success prediction tool</h1> 
+    <h1 style="text-align: center;">RGYB surgery success prediction tool</h1>
     <div class="container">
         <div class="row align-items-start">
             <div class="col">
                 <div class="card">
-                    <h2>Introduction</h2> 
+                    <h2>Introduction</h2>
                     <p>
-                        This tool was developed as a joint effort of the Metabolic Research Laboratory, Clínica Universidad de Navarra and Tecnun School of Engineering,
-                        Universidad de Navarra, to help healthcare professionals in the estimation of the likelihood of Roux-en-Y bariatric surgery success based on 
+                        This tool was developed as a joint effort of the Metabolic Research Laboratory, Clínica
+                        Universidad de Navarra and Tecnun School of Engineering,
+                        Universidad de Navarra, to help healthcare professionals in the estimation of the likelihood of
+                        Roux-en-Y bariatric surgery success based on
                         patient-specific pre and perioperative data (see below for the needed input variables).
 
-                        By leveraging three Machine Learning (ML) models to choose from, this tool provides success/failure predictions along with probability success score. These models
+                        By leveraging three Machine Learning (ML) models to choose from, this tool provides
+                        success/failure predictions along with probability success score. These models
                         have been trained using surgery outcome at 18 months measured by the following two metrics:
                     </p>
                     <div class="accordion" id="accordionPanelsStayOpenExample">
                         <div class="accordion-item">
-                          <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                Body Mass Index (BMI)
-                                <i class="bi bi-chevron-compact-down"></i>
-                            </button>
-                          </h2>
-                          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                            <div class="accordion-body">
-                                Prediction based on Body Mass Index (BMI) metric, computed as weight in kilograms divided by the square of height in meters. A BMI <strong>equal to or less</strong> than <strong>30 kg/m2</strong>
-                                is <strong>considered success</strong> (ML models based on BMI are referred to as <i>Model 1 & Model 2</i>).
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                    aria-controls="panelsStayOpen-collapseOne">
+                                    Body Mass Index (BMI)
+                                    <i class="bi bi-chevron-compact-down"></i>
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show"
+                                aria-labelledby="panelsStayOpen-headingOne">
+                                <div class="accordion-body">
+                                    Prediction based on Body Mass Index (BMI) metric, computed as weight in kilograms
+                                    divided by the square of height in meters. A BMI <strong>equal to or less</strong>
+                                    than <strong>30 kg/m2</strong>
+                                    is <strong>considered success</strong> (ML models based on BMI are referred to as
+                                    <i>Model 1 & Model 2</i>).
 
+                                </div>
                             </div>
-                          </div>
                         </div>
                         <div class="accordion-item">
-                          <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                                Excess Weight Loss (EWL)
-                                <i class="bi bi-chevron-compact-down"></i>
-                            </button>
-                          </h2>
-                          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-                            <div class="accordion-body">
-                                Prediction based on Excess Weight Loss (EWL) metric, calculated according to the formula EWL = (body weight (BW) before – BW after)/excess BW before, 
-                                where excess BW = total BW – ideal BW. An EWL% <strong> equal or greater </strong> than <strong>65% for males </strong> and <strong>75% for females </strong> is <strong>considered success</strong> (ML model based on EWL is referred to as <i>Model 3</i>).
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                                    aria-controls="panelsStayOpen-collapseTwo">
+                                    Excess Weight Loss (EWL)
+                                    <i class="bi bi-chevron-compact-down"></i>
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse"
+                                aria-labelledby="panelsStayOpen-headingTwo">
+                                <div class="accordion-body">
+                                    Prediction based on Excess Weight Loss (EWL) metric, calculated according to the
+                                    formula EWL = (body weight (BW) before – BW after)/excess BW before,
+                                    where excess BW = total BW – ideal BW. An EWL% <strong> equal or greater </strong>
+                                    than <strong>65% for males </strong> and <strong>75% for females </strong> is
+                                    <strong>considered success</strong> (ML model based on EWL is referred to as
+                                    <i>Model 3</i>).
 
+                                </div>
                             </div>
-                          </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="card" style="width: 18rem;">
-                <img src="{{ url_for('static',filename='/images/foto_equipo.JPG')}}" class="card-img-top" alt="Research group">
+                <img src="{{ url_for('static',filename='/images/foto_equipo.JPG')}}" class="card-img-top"
+                    alt="Research group">
                 <div class="card-body">
                     <h5 class="card-title">Research Team</h5>
                     <p class="card-text">members of the research group from left to right</p>
@@ -91,52 +112,65 @@
         <div class="row align-items-center">
             <div class="col">
                 <div class="card">
-                        <h2>How it works</h2>
-                        <p>
-                            <strong>1.</strong>&nbsp; Upload a CSV file containing patient data.
-                            ML models <i>Model 1 & Model 2</i>, based on BMI, need as input 16 variables (see provided test_data_1_2.csv file in GitHub for an example). ML model <i>Model 3</i>, based on EWL, needs as input 58 variables (see provided test_data_3.csv file in GitHub for an example).
-                        </p>
-                        <p>
-                            <strong>2.</strong>&nbsp; The tool expects a .csv file following the structure of the provided examples. In the first case, predictions for Model 1 and Model 2 will be computed; whereas in the second case only predictions for Model 3 will be computed.
-                            In all cases, the models will analyze the input and predict the probability of treatment success.
-                        </p>        
-                        <p><strong>3.</strong>&nbsp; Results of the predictions will be added as new columns in a newly generated .csv (one per model run), including:
-                            <ul class="indentted">
-                                <li>
-                                    Computed probability of success.
-                                </li>
-                                <li>
-                                    Final predicted label: 1 for “success” and 0 for “failure”.
-                                </li>
-                                <li>
-                                    Final writen label: “success” or “failure”.
-                                </li>
-                            </ul>
-                        </p> 
-                        <h4><strong>Important note:&nbsp;</strong></h4>
-                        <h6><strong>Variables:</strong></h6> 
-                        <p> 
-                            <strong>“Roux Limb”</strong> and <strong>“Treitz”</strong> are perioperative anatomical landmarks, that is, 
-                            defined during the surgery. Please enter in your .csv file whichever value you would like
-                            to evaluate for each individual patient, taking into account that a higher value means a more aggressive surgery. In particular:
-                            <ul class="indented">
-                                <li>
-                                    Roux Limb (alimentary limb): part of the small intestine that bypasses the stomach and duodenum. It connects the gastric pouch with the anastomosis with the biliopancreatic limb to allow contact between food and digestive enzymes. Value usually ranges from 40 to 400 cm. A higher value indicates a more aggressive surgery.
-                                </li>
-                                <li>
-                                    Treitz: art of the jejunum bypassed until the point of biliopancreatic limb anastomosis. Value usually ranges from 30 to 170 cm.
-                                </li>
-                            </ul>
-                        </p>               
+                    <h2>How it works</h2>
+                    <p>
+                        <strong>1.</strong>&nbsp; Upload a CSV file containing patient data.
+                        ML models <i>Model 1 & Model 2</i>, based on BMI, need as input 16 variables (see provided
+                        test_data_1_2.csv file in GitHub for an example). ML model <i>Model 3</i>, based on EWL, needs
+                        as input 58 variables (see provided test_data_3.csv file in GitHub for an example).
+                    </p>
+                    <p>
+                        <strong>2.</strong>&nbsp; The tool expects a .csv file following the structure of the provided
+                        examples. In the first case, predictions for Model 1 and Model 2 will be computed; whereas in
+                        the second case only predictions for Model 3 will be computed.
+                        In all cases, the models will analyze the input and predict the probability of treatment
+                        success.
+                    </p>
+                    <p><strong>3.</strong>&nbsp; Results of the predictions will be added as new columns in a newly
+                        generated .csv (one per model run), including:
+                    <ul class="indentted">
+                        <li>
+                            Computed probability of success.
+                        </li>
+                        <li>
+                            Final predicted label: 1 for “success” and 0 for “failure”.
+                        </li>
+                        <li>
+                            Final writen label: “success” or “failure”.
+                        </li>
+                    </ul>
+                    </p>
+                    <h4><strong>Important note:&nbsp;</strong></h4>
+                    <h6><strong>Variables:</strong></h6>
+                    <p>
+                        <strong>“Roux Limb”</strong> and <strong>“Treitz”</strong> are perioperative anatomical
+                        landmarks, that is,
+                        defined during the surgery. Please enter in your .csv file whichever value you would like
+                        to evaluate for each individual patient, taking into account that a higher value means a more
+                        aggressive surgery. In particular:
+                    <ul class="indented">
+                        <li>
+                            Roux Limb (alimentary limb): part of the small intestine that bypasses the stomach and
+                            duodenum. It connects the gastric pouch with the anastomosis with the biliopancreatic limb
+                            to allow contact between food and digestive enzymes. Value usually ranges from 40 to 400 cm.
+                            A higher value indicates a more aggressive surgery.
+                        </li>
+                        <li>
+                            Treitz: art of the jejunum bypassed until the point of biliopancreatic limb anastomosis.
+                            Value usually ranges from 30 to 170 cm.
+                        </li>
+                    </ul>
+                    </p>
                 </div>
             </div>
             <div class="col d-flex justify-content-center">
-                <div class="card" style="width: 24rem;">     
+                <div class="card" style="width: 24rem;">
                     <p>
                         <strong>📂 Upload your file to get started!</strong>
                     </p>
-                    <form  id="uploadForm" enctype="multipart/form-data"> 
-                        <img src="{{ url_for('static',filename='/images/subir-archivo.gif')}}" class="card-img-top" alt="...">
+                    <form id="uploadForm" enctype="multipart/form-data">
+                        <img src="{{ url_for('static',filename='/images/subir-archivo.gif')}}" class="card-img-top"
+                            alt="...">
                         <input type="file" name="archivo" accept=".csv">
                         <input type="submit" value="Upload">
                         <h1 id="charged"></h1>
@@ -144,70 +178,165 @@
                 </div>
             </div>
         </div>
+        <form method="POST" action="/submit">
+            <div class="row justify-content-center">
+                <div class="card col-lg-10 p-4 shadow">
+                    <h4 class="mb-4"><strong>Single Patient</strong></h4>
+                    <h6><strong>This options is only for running the Models 1 & Model 2 with only 1 patient</strong></h6>
+
+                    <div class="row">
+
+                        <!-- Repetimos col-md-4 para 3 columnas -->
+                        <div class="col-md-4 mb-3">
+                            <label for="campo1" class="form-label">Age(years)</label>
+                            <input type="text" name="campo1" id="campo1" class="form-control" />
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="campo2" class="form-label">Roux Limb(cm)</label>
+                            <input type="text" name="campo2" id="campo2" class="form-control" />
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="campo3" class="form-label">Weight(kg)</label>
+                            <input type="text" name="campo3" id="campo3" class="form-control" />
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="campo4" class="form-label">BMI(kg/m²)</label>
+                            <input type="text" name="campo4" id="campo4" class="form-control" />
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="campo5" class="form-label">Fat Mass(kg)</label>
+                            <input type="text" name="campo5" id="campo5" class="form-control" />
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="campo6" class="form-label">Waist circumference(cm)</label>
+                            <input type="text" name="campo6" id="campo6" class="form-control" />
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="campo7" class="form-label">Hip circumference(cm)</label>
+                            <input type="text" name="campo7" id="campo7" class="form-control" />
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="campo8" class="form-label">REE (r)(kcal)</label>
+                            <input type="text" name="campo8" id="campo8" class="form-control" />
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="campo9" class="form-label">REE (t)(kcal)</label>
+                            <input type="text" name="campo9" id="campo9" class="form-control" />
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="campo10" class="form-label">Basal Glycemia(mg/dL)</label>
+                            <input type="text" name="campo10" id="campo10" class="form-control" />
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="campo11" class="form-label">120’ Glycemia(mg/dL)</label>
+                            <input type="text" name="campo11" id="campo11" class="form-control" />
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="campo12" class="form-label">HOMA(index)</label>
+                            <input type="text" name="campo12" id="campo12" class="form-control" />
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="campo13" class="form-label">Triglycerides(mg/dL)</label>
+                            <input type="text" name="campo13" id="campo13" class="form-control" />
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="campo14" class="form-label">Leptin(ng/mL)</label>
+                            <input type="text" name="campo14" id="campo14" class="form-control" />
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="campo15" class="form-label">TSH(mUI/L)</label>
+                            <input type="text" name="campo15" id="campo15" class="form-control" />
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="campo16" class="form-label">AP(UI/L)</label>
+                            <input type="text" name="campo16" id="campo16" class="form-control" />
+                        </div>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+            </div>
+        </form>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var collapseOne = document.getElementById('collapseOne');
-            var collapseTwo = document.getElementById('collapseTwo');
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var collapseOne = document.getElementById('collapseOne');
+                var collapseTwo = document.getElementById('collapseTwo');
 
-            var bsCollapseOne = new bootstrap.Collapse(collapseOne, {
-                toggle: true // Mostrar inicialmente si está configurado para ello
-            });
+                var bsCollapseOne = new bootstrap.Collapse(collapseOne, {
+                    toggle: true // Mostrar inicialmente si está configurado para ello
+                });
 
-            var bsCollapseTwo = new bootstrap.Collapse(collapseTwo, {
-                toggle: false // No mostrar inicialmente
-            });
+                var bsCollapseTwo = new bootstrap.Collapse(collapseTwo, {
+                    toggle: false // No mostrar inicialmente
+                });
 
-            var buttonOne = document.querySelector('#headingOne .accordion-button');
-            var buttonTwo = document.querySelector('#headingTwo .accordion-button');
+                var buttonOne = document.querySelector('#headingOne .accordion-button');
+                var buttonTwo = document.querySelector('#headingTwo .accordion-button');
 
-            buttonOne.addEventListener('click', function () {
-                bsCollapseOne.toggle(); // Alterna el primer colapso
-                toggleIcon(this);
-            });
+                buttonOne.addEventListener('click', function () {
+                    bsCollapseOne.toggle(); // Alterna el primer colapso
+                    toggleIcon(this);
+                });
 
-            buttonTwo.addEventListener('click', function () {
-                bsCollapseTwo.toggle(); // Alterna el segundo colapso
-                toggleIcon(this);
-            });
+                buttonTwo.addEventListener('click', function () {
+                    bsCollapseTwo.toggle(); // Alterna el segundo colapso
+                    toggleIcon(this);
+                });
 
-            
-            function toggleIcon(button) {
+
+                function toggleIcon(button) {
                     console.log('Button clicked');
                     var icon = button.querySelector('i');
-                    if (icon.classList[1]=='bi-chevron-compact-down') {
+                    if (icon.classList[1] == 'bi-chevron-compact-down') {
                         icon.classList.remove('bi-chevron-compact-down');
                         icon.classList.add('bi-chevron-compact-up');
                     } else {
                         icon.classList.remove('bi-chevron-compact-up');
                         icon.classList.add('bi-chevron-compact-down');
                     }
-            };
-        });
-        document.addEventListener("DOMContentLoaded", function() {
-            // Manejador de evento para el formulario
-            const form = document.getElementById("uploadForm");
-            form.addEventListener("submit", function(event) {
-                event.preventDefault(); // Prevenir el envío por defecto
-
-                const formData = new FormData(form);
-
-                fetch("/", {
-                    method: "POST",
-                    body: formData
-                })
-                .then(response => response.text()) // Obtener el texto de la respuesta
-                .then(text => {
-                    // Actualizar el contenido del h1 con id "charged"
-                    document.getElementById("charged").innerText = text;
-                })
-                .catch(error => {
-                    document.getElementById("charged").innerText = "Error al enviar el formulario: " + error.message;
-                });
+                };
             });
-        })
-    </script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Manejador de evento para el formulario
+                const form = document.getElementById("uploadForm");
+                form.addEventListener("submit", function (event) {
+                    event.preventDefault(); // Prevenir el envío por defecto
+
+                    const formData = new FormData(form);
+
+                    fetch("/", {
+                        method: "POST",
+                        body: formData
+                    })
+                        .then(response => response.text()) // Obtener el texto de la respuesta
+                        .then(text => {
+                            // Actualizar el contenido del h1 con id "charged"
+                            document.getElementById("charged").innerText = text;
+                        })
+                        .catch(error => {
+                            document.getElementById("charged").innerText = "Error al enviar el formulario: " + error.message;
+                        });
+                });
+            })
+        </script>
 </body>
+
 </html>
