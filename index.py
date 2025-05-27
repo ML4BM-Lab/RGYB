@@ -1,5 +1,5 @@
 import os
-os.environ['R_HOME'] = r'C:\Program Files\R\R-4.4.3'
+#os.environ['R_HOME'] = r'C:\Program Files\R\R-4.4.3'
 import pandas as pd
 import rpy2.robjects as ro
 from rpy2.robjects import r, pandas2ri
@@ -144,8 +144,8 @@ def modelo_gb_bmi():
         name_test = names(test_data)
         common <- intersect(name_test,name_dfr)
         ncommon <- length(common)
-        print(ncommon)
-        print(common)
+        #print(ncommon)
+        #print(common)
       
 
         indices_common <- match(common,name_test) 
