@@ -46,7 +46,7 @@ def home():
                     if n== 16:
                         modelo_gb_bmi()
                         prediccionesx+=1
-                        r('print("pasoooooooooo")')
+                        # r('print("pasoooooooooo")')
                         modelo_rf_bmi()
                         prediccionesx+=1
                     else:
@@ -63,6 +63,65 @@ def home():
         
     return render_template('index.html')
 
+@app.route('/submit', methods=['POST'])
+def submit():
+    errores = []
+    campos = {
+        "campo1": ("Age", 18, 90),
+        "campo2": ("Roux Limb", 30, 300),
+        "campo3": ("Weight", 50, 300),
+        "campo4": ("BMI", 20, 100),
+        "campo5": ("Fat Mass", 20, 200),
+        "campo6": ("Waist", 50, 250),
+        "campo7": ("Hip", 50, 250),
+        "campo8": ("REE (r)", 50, 5000),
+        "campo9": ("REE (t)", 50, 5000),
+        "campo10": ("Basal Glycemia", 40, 600),
+        "campo11": ("120' Glycemia", 40, 600),
+        "campo12": ("HOMA", 0.1, 100),
+        "campo13": ("Triglycerides", 20, 2000),
+        "campo14": ("Leptin", 0.5, 400),
+        "campo15": ("TSH", 0.001, 70),
+        "campo16": ("AP", 10, 300),
+    }
+
+    data = {}
+
+    for key, (nombre, minimo, maximo) in campos.items():
+        valor = request.form.get(key)
+        try:
+            valor_f = float(valor)
+            if not (minimo <= valor_f <= maximo):
+                errores.append(f"{nombre} debe estar entre {minimo} y {maximo}")
+            data[nombre] = valor_f
+        except ValueError:
+            errores.append(f"{nombre} debe ser un número")
+
+    if errores:
+        return f"<h3>Errores encontrados:</h3><ul>" + "".join(f"<li>{e}</li>" for e in errores) + "</ul>", 400
+
+    # ✅ Convertimos a DataFrame
+    df = pd.DataFrame([data])  # Un solo registro
+    try :
+        file_path = "./models/mean_std2.csv"
+        dft = pd.read_csv(file_path)
+        #print(dft["variable"])
+        with(ro.default_converter + pandas2ri.converter).context():
+            dftc = ro.conversion.get_conversion().py2rpy(dft)
+            r.assign('test_data',dftc)
+        with(ro.default_converter + pandas2ri.converter).context():
+                            dfr = ro.conversion.get_conversion().py2rpy(df)
+                            r.assign('dfr',dfr)
+                            modelo_gb_bmi()
+                            prediccionesx+=1
+                            # r('print("pasoooooooooo")')
+                            modelo_rf_bmi()
+                            return f"Predicciones realizadas exitosamente: {prediccionesx}"
+    except Exception as e:
+            return f"Ocurrió un error al procesar el archivo: {str(e)}"  
+    return render_template('index.html')
+    # return f"<h3>Formulario válido. Datos procesados en pandas:</h3>{df.to_html(classes='table table-bordered')}"
+    return render_template('index.html')
 
 def modelo_gb_bmi():
     r('''
