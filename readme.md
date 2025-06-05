@@ -40,5 +40,6 @@ docker run -p 5002:5002 -v PATH:/app/obesidad ju4n5ilva/rgyb:latest
 
 When you run the model open a web browser with url localhost:5002 a upload the file.
 
--The model sample files can be obtained from the folder call Sample Files in this repository,
+-The model sample files can be obtained from the folder call Sample Files in this repository.
+
 -the model 1 and 2 based on BMI use test_data_1_2.csv, the model 3 based on EWL use test_data_3.csv
