@@ -1,6 +1,5 @@
 # RGYB Application 
 
-There are two options to run the developed tool, via web-brower in the following address () or locally thourgh blah bah 
 ## Docker
 <p align="center">
   <a href="https://docs.docker.com/desktop/release-notes/#4310">
