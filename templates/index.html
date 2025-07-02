@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <title>RGYB surgery success prediction tool</title>
+    <title>RYGB Sucess Estimator (RYSUES)</title>
     <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css')}}">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -29,7 +29,7 @@
             </div>
         </div>
     </div>
-    <h1 style="text-align: center;">RGYB surgery success prediction tool</h1>
+    <h1 style="text-align: center;">RYGB Sucess Estimator (RYSUES)</h1>
     <div class="container">
         <div class="row align-items-start">
             <div class="col">
@@ -61,7 +61,7 @@
                                 <div class="accordion-body">
                                     Prediction based on Body Mass Index (BMI) metric, computed as weight in kilograms
                                     divided by the square of height in meters. A BMI <strong>equal to or less</strong>
-                                    than <strong>30 kg/m2</strong>
+                                    than <strong>30 kg/m²</strong>
                                     is <strong>considered success</strong> (ML models based on BMI are referred to as
                                     <i>Model 1 & Model 2</i>).
 
@@ -102,7 +102,7 @@
                     <p class="card-text">members of the research group from left to right</p>
                     <ul class="list-group">
                         <li class="list-group-item">Dra. Idoia Ochoa Álvarez</li>
-                        <li class="list-group-item">Rocio Marugán Pinos</li>
+                        <li class="list-group-item">Rocío Marugán Pinos</li>
                         <li class="list-group-item">Dr. Javier Gómez Ambrosi</li>
                         <li class="list-group-item"> Dra. Gema Frühbeck</li>
                     </ul>
@@ -113,50 +113,57 @@
             <div class="col">
                 <div class="card">
                     <h2>How it works</h2>
+                    <h4>Option 1: multiple patient prediction</h4>
                     <p>
-                        <strong>1.</strong>&nbsp; Upload a CSV file containing patient data.
+                        <strong>1.</strong>&nbsp;<span class="subrayado"> Prepare your CSV file containing patient data.</span>
                         ML models <i>Model 1 & Model 2</i>, based on BMI, need as input 16 variables (see provided
                         test_data_1_2.csv file in GitHub for an example). ML model <i>Model 3</i>, based on EWL, needs
                         as input 58 variables (see provided test_data_3.csv file in GitHub for an example).
+                        The tool expects a .csv file following the structure of the provided examples. In the first case,
+                        predictions for Model 1 and Model 2 will be computed; whereas in the second case only predictions
+                        for Model 3 will be computed. In all cases, the models will analyze the input and predict the
+                        probability of treatment success.
                     </p>
                     <p>
-                        <strong>2.</strong>&nbsp; The tool expects a .csv file following the structure of the provided
-                        examples. In the first case, predictions for Model 1 and Model 2 will be computed; whereas in
-                        the second case only predictions for Model 3 will be computed.
-                        In all cases, the models will analyze the input and predict the probability of treatment
-                        success.
+                        <strong>2.</strong>&nbsp;<span class="subrayado"> Upload your CSV file to the dropzone on the right. </span> 
                     </p>
-                    <p><strong>3.</strong>&nbsp; Results of the predictions will be added as new columns in a newly
-                        generated .csv (one per model run), including:
+                    <p><strong>3.</strong>&nbsp;<span class="subrayado"> Results of the predictions will be added as new columns in a newly
+                        generated .csv (one per model run)</span>, including:
                     <ul class="indentted">
                         <li>
-                            Computed probability of success.
+                            Computed probability of success (0 - 1).
                         </li>
                         <li>
                             Final predicted label: 1 for “success” and 0 for “failure”.
                         </li>
                         <li>
-                            Final writen label: “success” or “failure”.
+                            Final written label: “success” or “failure”.
                         </li>
                     </ul>
                     </p>
+                    <h4>Option 2: single patient prediction</h4>
+                    <p><strong>1.</strong>&nbsp;<span class="subrayado">Manually introduce each variable’s values for one patient in the 
+                        windows included below.</span>This option will only provide a prediction using <i>Model 1 & Model 2</i>, with their
+                        16 input variables. Decimal used must be a dot “.”.
+  </p>
+                    <p><strong>2.</strong>&nbsp;<span class="subrayado">Press “send” and the prediction will appear on screen</span></p>
                     <h4><strong>Important note:&nbsp;</strong></h4>
                     <h6><strong>Variables:</strong></h6>
                     <p>
-                        <strong>“Roux Limb”</strong> and <strong>“Treitz”</strong> are perioperative anatomical
+                        <span class="subrayado"><strong>“Roux Limb”</strong> and <strong>“Treitz”</strong> are perioperative anatomical
                         landmarks, that is,
-                        defined during the surgery. Please enter in your .csv file whichever value you would like
+                        defined during the surgery</span>. Please enter in your .csv file whichever value you would like
                         to evaluate for each individual patient, taking into account that a higher value means a more
                         aggressive surgery. In particular:
                     <ul class="indented">
                         <li>
-                            Roux Limb (alimentary limb): part of the small intestine that bypasses the stomach and
+                            <strong>Roux Limb (alimentary limb):</strong> part of the small intestine that bypasses the stomach and
                             duodenum. It connects the gastric pouch with the anastomosis with the biliopancreatic limb
                             to allow contact between food and digestive enzymes. Value usually ranges from 40 to 400 cm.
                             A higher value indicates a more aggressive surgery.
                         </li>
                         <li>
-                            Treitz: Part of the jejunum bypassed until the point of biliopancreatic limb anastomosis.
+                            <strong>Treitz:</strong> Part of the jejunum bypassed until the point of biliopancreatic limb anastomosis.
                             Value usually ranges from 30 to 170 cm.
                         </li>
                     </ul>
@@ -188,87 +195,101 @@
 
                         <!-- Repetimos col-md-4 para 3 columnas -->
                         <div class="col-md-4 mb-3">
-                            <label for="campo1" class="form-label">Age(years)</label>
+                            <label for="campo1" class="form-label">Age (years)</label>
                             <input type="text" name="campo1" id="campo1" class="form-control" />
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="campo2" class="form-label">Roux Limb(cm)</label>
+                            <label for="campo2" class="form-label">Roux Limb (cm)</label>
                             <input type="text" name="campo2" id="campo2" class="form-control" />
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="campo3" class="form-label">Weight(kg)</label>
+                            <label for="campo3" class="form-label">Weight (kg)</label>
                             <input type="text" name="campo3" id="campo3" class="form-control" />
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="campo4" class="form-label">BMI(kg/m²)</label>
+                            <label for="campo4" class="form-label">BMI (kg/m²)</label>
                             <input type="text" name="campo4" id="campo4" class="form-control" />
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="campo5" class="form-label">Fat Mass(kg)</label>
+                            <label for="campo5" class="form-label">Fat Mass (kg) <sup class="blue-sup">1</sup></label>
                             <input type="text" name="campo5" id="campo5" class="form-control" />
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="campo6" class="form-label">Waist circumference(cm)</label>
+                            <label for="campo6" class="form-label">Waist circumference (cm) <sup class="blue-sup">2</sup></label>
                             <input type="text" name="campo6" id="campo6" class="form-control" />
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="campo7" class="form-label">Hip circumference(cm)</label>
+                            <label for="campo7" class="form-label">Hip circumference (cm) <sup class="blue-sup">3</sup></label>
                             <input type="text" name="campo7" id="campo7" class="form-control" />
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="campo8" class="form-label">REE (r)(kcal)</label>
+                            <label for="campo8" class="form-label">REE (r)(kcal) <sup class="blue-sup">4</sup></label>
                             <input type="text" name="campo8" id="campo8" class="form-control" />
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="campo9" class="form-label">REE (t)(kcal)</label>
+                            <label for="campo9" class="form-label">REE (t)(kcal) <sup class="blue-sup">5</sup></label>
                             <input type="text" name="campo9" id="campo9" class="form-control" />
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="campo10" class="form-label">Basal Glycemia(mg/dL)</label>
+                            <label for="campo10" class="form-label">Basal Glycemia (mg/dL) <sup class="blue-sup">6</sup></label>
                             <input type="text" name="campo10" id="campo10" class="form-control" />
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="campo11" class="form-label">120’ Glycemia(mg/dL)</label>
+                            <label for="campo11" class="form-label">120’ Glycemia (mg/dL) <sup class="blue-sup">7</sup></label>
                             <input type="text" name="campo11" id="campo11" class="form-control" />
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="campo12" class="form-label">HOMA(index)</label>
+                            <label for="campo12" class="form-label">HOMA (index) <sup class="blue-sup">8</sup></label>
                             <input type="text" name="campo12" id="campo12" class="form-control" />
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="campo13" class="form-label">Triglycerides(mg/dL)</label>
+                            <label for="campo13" class="form-label">Triglycerides (mg/dL) <sup class="blue-sup">9</sup></label>
                             <input type="text" name="campo13" id="campo13" class="form-control" />
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="campo14" class="form-label">Leptin(ng/mL)</label>
+                            <label for="campo14" class="form-label">Leptin (ng/mL) <sup class="blue-sup">10</sup></label>
                             <input type="text" name="campo14" id="campo14" class="form-control" />
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="campo15" class="form-label">TSH(mUI/L)</label>
+                            <label for="campo15" class="form-label">TSH (mUI/L) <sup class="blue-sup">11</sup></label>
                             <input type="text" name="campo15" id="campo15" class="form-control" />
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="campo16" class="form-label">AP(UI/L)</label>
+                            <label for="campo16" class="form-label">AP (UI/L)</label>
                             <input type="text" name="campo16" id="campo16" class="form-control" />
                         </div>
 
                     </div>
                     <button type="submit" class="btn btn-primary">Send</button>
+                    <p></p>
+                    <p class="reference"><strong>1</strong> Fat mass: Total weight of fat tissue in the body.</p>
+                    <p class="reference"><strong>2</strong> Waist circumference: Measurement around the abdomen, used to assess abdominal fat.</p>
+                    <p class="reference"><strong>3</strong> Hip circumference: Measurement around the widest part of the hips.</p>
+                    <p class="reference"><strong>4</strong> REE (r): Measured resting energy expenditure — the energy your body uses at rest.</p>
+                    <p class="reference"><strong>5</strong> REE (t): Theoretical resting energy expenditure — estimated energy use at rest based on the Harris-Benedict equation.</p>
+                    <p class="reference"><strong>6</strong> Basal glycemia: Blood sugar level after fasting, usually measured in the morning.</p>
+                    <p class="reference"><strong>7</strong> 120' glycemia: Blood sugar level 120 minutes after consuming glucose (OGTT).</p>
+                    <p class="reference"><strong>8</strong> HOMA index: Estimate of insulin resistance, calculated from fasting glucose and insulin.</p>
+                    <p class="reference"> HOMA-IR = (Fasting insulin [µU/mL] × Fasting glucose [mg/dL]) / 405.</p>
+                    <p class="reference"><strong>9</strong> Triglycerides: A type of fat in the blood, high levels may increase heart disease risk.</p>
+                    <p class="reference"><strong>10</strong> Leptin: Hormone that helps regulate appetite and energy balance.</p>
+                    <p class="reference"><strong>11</strong> TSH: Thyroid-stimulating hormone, controls thyroid function and metabolism.</p>
+
                 </div>
             </div>
         </form>
@@ -276,6 +297,13 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
         <script>
+            document.addEventListener('keydown', function(event) {
+            // Verifica si se presionó Ctrl + F5
+                if (event.ctrlKey && event.key === 'F5') {
+                    event.preventDefault();  // Previene el comportamiento por defecto de Ctrl + F5
+                    window.location.href = '/';  // Redirige a la página de inicio
+                }
+            });
             document.addEventListener('DOMContentLoaded', function () {
                 var collapseOne = document.getElementById('collapseOne');
                 var collapseTwo = document.getElementById('collapseTwo');
