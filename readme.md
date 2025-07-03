@@ -1,4 +1,6 @@
-# RGYB Application 
+# RYGB Success Estimator (RYSUES)
+
+We developed a web tool where users can apply our models with their own data. There are three ways to access it:
 
 ## Docker
 <p align="center">
